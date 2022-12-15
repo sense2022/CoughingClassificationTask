@@ -22,14 +22,9 @@ def spec_visualize(input_data):
     data = input_data[:,:1000]
     label = input_data[:,1000]
     
-    kk = 0
-
     for i, c in enumerate(data):
         
-        if label[i] != 4:
-            continue
-        kk += 1
-        if kk < 7:
+        if label[i] != 0:
             continue
         
         # normalize
@@ -75,9 +70,9 @@ def spec_visualize(input_data):
         librosa.display.specshow(spec, sr=30, y_axis='hz',cmap='viridis')
 
         # Set up labels, titles and ticks
-        fig.suptitle("Walking", size=45, fontweight="bold")
+        fig.suptitle("Coughing", size=45, fontweight="bold")
         plt.xlabel("Times (s)", size=45, fontweight="bold")
-        axs[0].set_ylabel("$\Delta$R/R$_0$ (%)", size=45, fontweight="bold")
+        axs[0].set_ylabel("Normalized", size=45, fontweight="bold")
         axs[1].set_ylabel("Freq. (Hz)", size=45, fontweight="bold")
 
         axs[0].yaxis.set_major_locator(mticker.FixedLocator(ytick_label))
@@ -101,7 +96,7 @@ def spec_visualize(input_data):
         plt.tick_params(width=lw)
 
         # Save plot figures
-        plt.savefig('Walking.png', bbox_inches = "tight")
+        plt.savefig('Coughing.png', bbox_inches = "tight")
 
         raise SystemExit()
 

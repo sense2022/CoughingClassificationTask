@@ -4,6 +4,10 @@
 
 This repo is official **[PyTorch](https://pytorch.org)** implementation of training and testing the coughing classification project. 
 
+<p align="center">
+<img src="assets/network.png" width="800" height="300">
+</p>
+
 **What this repo provides:**
 * [PyTorch](https://pytorch.org) implementation of [Soft, Skin-Interfaced Multimodal Sensing Systems with Artificial Intelligence for Continuous Monitoring of COVID-19 Symptoms].
 * Flexible and simple code.
@@ -16,18 +20,9 @@ This repo is official **[PyTorch](https://pytorch.org)** implementation of train
 * [cuDNN](https://developer.nvidia.com/cudnn)
 * [Anaconda](https://www.anaconda.com/download/)
 
-This code is tested under Ubuntu 16.04, CUDA 9.0, cuDNN 7.1 environment with two NVIDIA 1080Ti GPUs.
+This code is tested under Ubuntu 16.04, CUDA 9.0, cuDNN 7.1 environment with one NVIDIA TITAN GPU.
 
 Python 3.6.5 version with Anaconda 3 is used for development.
-<!-- 
-## Quick demo
-You can try quick demo at `demo` folder. 
-* Download the pre-trained PoseNet in [here](https://drive.google.com/file/d/1xjefKgjsH-W8v2lVn1Hbwzp2_Su7KtG0/view?usp=sharing).
-* Prepare `input.jpg` and pre-trained snapshot at `demo` folder.
-* Set `bbox_list` at [here](https://github.com/mks0601/3DMPPE_POSENET_RELEASE/blob/f8d420895570682c815d37ea74e2d6b1bf646818/demo/demo.py#L68).
-* Set `root_depth_list` at [here](https://github.com/mks0601/3DMPPE_POSENET_RELEASE/blob/bf4fa6f8076fcd3f636ddcc31479e2becbba19ec/demo/demo.py#L74).
-* Run `python demo.py --gpu 0 --test_epoch 24` if you want to run on gpu 0.
-* You can see `output_pose_2d.jpg` and new window that shows 3D pose. -->
 
 ## Directory
 
@@ -85,13 +80,6 @@ If you have a problem with 'Download' problem when tried to download dataset fro
 * In the upper right corner click on three vertical dots and select “make a copy”  
 * Then, the file is copied to your personal google drive account. You can download it from your personal account.  
 ```  
-
-<!-- 
-
-### 3D visualization
-* Run `$DB_NAME_img_name.py` to get image file names in `.txt` format.
-* Place your test result files (`preds_2d_kpt_$DB_NAME.mat`, `preds_3d_kpt_$DB_NAME.mat`) in `single` or `multi` folder.
-* Run `draw_3Dpose_$DB_NAME.m` -->
 
 ## Running Coughing Classification
 ### Start
