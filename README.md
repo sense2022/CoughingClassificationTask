@@ -9,7 +9,7 @@ This repo is official **[PyTorch](https://pytorch.org)** implementation of train
 </p>
 
 **What this repo provides:**
-* [PyTorch](https://pytorch.org) implementation of [Soft, Skin-Interfaced Multimodal Sensing Systems with Artificial Intelligence for Continuous Monitoring of COVID-19 Symptoms].
+* [PyTorch](https://pytorch.org) implementation of **Soft, Skin-Interfaced Multimodal Sensing Systems with Artificial Intelligence for Continuous Monitoring of COVID-19 Symptoms.**
 * Flexible and simple code.
 * Classification training and testing code.
 * Results visulization code.
@@ -36,6 +36,7 @@ ${CoughingClassificationTask}
 |-- roc_curve.py
 |-- test_single_sample.py
 |-- train_classification.py
+|-- data_visualization.py
 ```
 * `data` contains 5 categories in five volunteers; also contains four folds of all data in `${volunteers}`
 * `cf_matrix.py` used for visulize the confusion matrix.
@@ -43,6 +44,7 @@ ${CoughingClassificationTask}
 * `roc_curve.py` visulize the ROC curves' results. 
 * `test_single_sample.py` test one single sample for demo. 
 * `train_classification.py` train the classification model and output the training and testing results.
+* `data_visualization.py` visualize the normalized data and the spectrogram image. 
 
 ### Data
 Please download the dataset in this **[Link](https://drive.google.com/file/d/17bhcMAxF1uNIjxTIcNvOPY-2vRhiKIAI/view?usp=sharing)**. 
@@ -130,6 +132,16 @@ If you have a problem with 'Download' problem when tried to download dataset fro
 
 ## Results
 The performance can be visulize in two perspectives, including confusion matrix and ROC curves. 
+
+### Data Visulization
+* You can visualize the normalized data and corresponding spectrogram image by running the following command,
+  ```bash
+  python3 data_visulization.py
+  ```
+* The visualized data shown as follow,
+    <p align="center">
+    <img src="assets/data.png" width="600" height="300">
+    </p>
 
 ### Confusion Matrix
 * The testing confusion matrix can be found during the training progress.
