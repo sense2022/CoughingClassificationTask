@@ -5,7 +5,7 @@
 This repo is official **[PyTorch](https://pytorch.org)** implementation of training and testing the coughing classification project. 
 
 <p align="center">
-<img src="assets/network.png" width="800" height="300">
+<img src="assets/network.png" width="800" height="200">
 </p>
 
 **What this repo provides:**
@@ -37,7 +37,7 @@ ${CoughingClassificationTask}
 |-- test_single_sample.py
 |-- train_classification.py
 ```
-* `data` contains 5 categories in different volunteers.
+* `data` contains 5 categories in five volunteers; also contains four folds of all data in `${volunteers}`
 * `cf_matrix.py` used for visulize the confusion matrix.
 * `data_preparation.py` pack the data into different folds. 
 * `roc_curve.py` visulize the ROC curves' results. 
@@ -83,33 +83,86 @@ If you have a problem with 'Download' problem when tried to download dataset fro
 
 ## Running Coughing Classification
 ### Start
-* In the `main/config.py`, you can change settings of the model including dataset to use, network backbone, and input size and so on.
+* In the `train_classification.py`, you can change settings of the model including dataset, network backbone, and training visualization.
+    ```python3
+    Line 141: visualization = True
+    ```
+
+### Data Preparation
+* In the `data_preparation.py`, you can choose the specific volunteers to randomly generate the training set and testing set. 
+    ```bash
+    python3 data_preparation.py 
+    ```
+* The prepared dataset is placed in ${data/volunteers}. You can directly use these files. 
 
 ### Train
-In the `main` folder, run
-```bash
-python train.py --gpu 0-1
-```
-to train the network on the GPU 0,1. 
+* In the root folder, run
+    ```bash
+    python3 train_classification.py 
+    ```
+  to train the network on the GPU 0. 
 
-If you want to continue experiment, run 
-```bash
-python train.py --gpu 0-1 --continue
-```
-`--gpu 0,1` can be used instead of `--gpu 0-1`.
+ * You can simplely swith the backbone network by comment the following code
+
+    ```python3
+    Line 170
+    # initialize the model (ResNet/mobileNetv2)
+    model = resnet18(pretrained=True)
+    model.fc = nn.Linear(512,5)
+    model.conv1 = nn.Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    
+    # model = mobilenet_v2(pretrained=True)
+    # model.features[0][0] = nn.Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+    # model.classifier[1] = nn.Linear(1280,5)
+    ```
 
 ### Test
-Place trained model at the `output/model_dump/`.
+* Place trained model at the `models/`.
+* You can modify the model root on Line 64
+    ```python3
+    model_path = os.path.join('models', 'best.pth')
+    ```
+* In the `root` folder, run 
+  ```bash
+  python3 test_single_sample.py
+  ```
+  to test the network on the GPU 0 with the best trained model. 
 
-In the `main` folder, run 
-```bash
-python test.py --gpu 0-1 --test_epoch 20
-```
-to test the network on the GPU 0,1 with 20th epoch trained model. `--gpu 0,1` can be used instead of `--gpu 0-1`.
+## Results
+The performance can be visulize in two perspectives, including confusion matrix and ROC curves. 
 
-<!-- ## Results
-Here I report the performance of the PoseNet. 
-* Download pre-trained models of the PoseNetNet in [here](https://drive.google.com/drive/folders/1El3qfdtgttO90X25k_680V2UCDv_TPoJ?usp=sharing) 
-* Bounding boxs (from DetectNet) and root joint coordintates (from RootNet) of Human3.6M, MSCOCO, and MuPoTS-3D dataset in [here](https://drive.google.com/drive/folders/1bmQWFiT0ZU4Q7dlsRaPGqaqoCAOeThGr?usp=sharing). -->
+### Confusion Matrix
+* The testing confusion matrix can be found during the training progress.
+* In the root folder, run
+    ```bash
+    python3 cf_matrix.py 
+    ```
+  to visulize the confusion matrix in paper format. 
+
+* You can simplely modify the confusion matrix by revise the Line 137. It can calculate the accuracy automatically and present on the bottom of the confusion matrix. Please see the follow example. 
+  
+    <p align="left">
+    <img src="assets/cf_subject.png" width="800" height="200">
+    </p>
 
 
+### ROC Curves
+* In the root folder, run
+    ```bash
+    python3 roc_curve.py 
+    ```
+  to visulize the ROC Curve and AUC values in paper format. 
+
+* You can simplely setup the models by revise the Line 139.
+  ```python3
+  loaded_dict_enc = torch.load('./models/best.pth', map_location=device)
+  ```
+* You also can simple choose the testing set by modify the Line 121.
+  ```python3
+  data_test = A
+  ``` 
+* It can calculate the AUC values automatically and present on the bottom of the ROC curves. Please see the follow example. 
+  
+    <p align="left">
+    <img src="assets/ROC.png" width="800" height="200">
+    </p>
