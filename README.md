@@ -46,43 +46,6 @@ ${CoughingClassificationTask}
 * `train_classification.py` train the classification model and output the training and testing results.
 * `data_visualization.py` visualize the normalized data and the spectrogram image. 
 
-### Data
-Please download the dataset in this **[Link](https://drive.google.com/file/d/17bhcMAxF1uNIjxTIcNvOPY-2vRhiKIAI/view?usp=sharing)**. 
-
-You need to upzip the dataset and follow directory structure of the `data` as below.
-```
-${CoughingClassificationTask}
-|-- data
-|   |-- volunteer1
-|   |   |-- coughing
-|   |   |-- laughing
-|   |   |-- speaking
-|   |   |-- throat_cleaning
-|   |   |-- walking
-|   |-- volunteer2
-|   |   |-- coughing
-|   |   |-- laughing
-|   |   |-- speaking
-|   |   |-- throat_cleaning
-|   |   |-- walking
-|
-`
-`
-|   |-- volunteers
-|   |   |-- data_A.pth
-|   |   |-- data_B.pth
-|   |   |-- data_C.pth
-|   |   |-- data_D.pth
-```
-
-If you have a problem with 'Download' problem when tried to download dataset from google drive link, please try this trick.  
-```  
-* Go the shared folder, which contains files you want to copy to your drive  
-* Select all the files you want to copy  
-* In the upper right corner click on three vertical dots and select “make a copy”  
-* Then, the file is copied to your personal google drive account. You can download it from your personal account.  
-```  
-
 ## Running Coughing Classification
 ### Start
 * In the `train_classification.py`, you can change settings of the model including dataset, network backbone, and training visualization.
